@@ -32,3 +32,12 @@ def make_pairs(images, labels):
 		pairLabels.append([0])
 	# return a 2-tuple of our image pairs and labels
 	return (np.array(pairImages), np.array(pairLabels))
+
+def euclidean_distance(vectors):
+	# unpack the vectors into separate lists
+	(featsA, featsB) = vectors
+	# compute the sum of squared distances between the vectors
+	sumSquared = K.sum(K.square(featsA - featsB), axis=1,
+		keepdims=True)
+	# return the euclidean distance between the vectors
+	return K.sqrt(K.maximum(sumSquared, K.epsilon()))
